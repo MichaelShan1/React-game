@@ -1,13 +1,44 @@
-import useCategory from '../hooks/useCategory';
+import {
+  Button,
+  HStack,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
+import useCategory, { Genre } from '../hooks/useCategory';
+import optimizeImage from '../services/image-url';
 
-const CategoryList = () => {
-  const { data } = useCategory();
+interface Props {
+  onSelectCate: (cate: Genre) => void;
+  selectedCate: Genre | null;
+}
+const CategoryList = ({ selectedCate, onSelectCate }: Props) => {
+  const { data, loading, error } = useCategory();
+  if (error) return null;
+  if (loading) return <Spinner></Spinner>;
   return (
-    <ul>
+    <List>
       {data.map((category) => (
-        <li key={category.id}>{category.name}</li>
+        <ListItem paddingY="5px" key={category.id}>
+          <HStack>
+            <Image
+              boxSize="32px"
+              borderRadius="8"
+              src={optimizeImage(category.image_background)}
+            />
+            <Button
+              onClick={() => onSelectCate(category)}
+              variant="link"
+              fontSize="lg"
+            >
+              {category.name}
+            </Button>
+          </HStack>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
 
