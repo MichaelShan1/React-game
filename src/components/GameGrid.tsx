@@ -5,7 +5,7 @@ import GameContainer from './GameContainer';
 import GameLoading from './GameLoading';
 
 const GameGrid = () => {
-  const { games, error, loading } = useGames();
+  const { data, error, loading } = useGames();
   const loadingGames = [1, 2, 3, 4, 5, 6];
 
   return (
@@ -22,7 +22,7 @@ const GameGrid = () => {
               <GameLoading key={loading}></GameLoading>
             </GameContainer>
           ))}
-        {games.map((game) => (
+        {data.map((game) => (
           <GameContainer>
             <GameCard key={game.id} game={game}></GameCard>
           </GameContainer>
