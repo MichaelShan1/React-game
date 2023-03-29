@@ -3,6 +3,7 @@ import React from 'react';
 import { Game } from '../hooks/useGames';
 import optimizeImage from '../services/image-url';
 import CriticScore from './CriticScore';
+import Emoji from './Emoji';
 import PlatFormIcon from './PlatFormIcon';
 
 interface Props {
@@ -13,13 +14,16 @@ const GameCard = ({ game }: Props) => {
     <Card>
       <Image src={optimizeImage(game.background_image)} />
       <CardBody>
-        <Heading fontSize="2xl">{game.name}</Heading>
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" marginBottom={3}>
           <PlatFormIcon
             platforms={game.parent_platforms.map((p) => p.platform)}
           ></PlatFormIcon>
           <CriticScore score={game.metacritic}></CriticScore>
         </HStack>
+        <Heading fontSize="2xl">
+          {game.name}
+          <Emoji rating={game.rating_top}></Emoji>
+        </Heading>
       </CardBody>
     </Card>
   );
