@@ -1,24 +1,26 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
-import React from 'react';
+
 import { BsChevronDown } from 'react-icons/bs';
 
 const sortOrders = [
-  { value: '', label: 'Relevance' },
-  { value: '-added', label: 'Date added' },
-  { value: 'name', label: 'Name' },
-  { value: '-released', label: 'Release date' },
-  { value: '-metacritic', label: 'Populartity' },
-  { value: '-rating', label: 'Average rating' },
+  { value: '', label: '全部' },
+  { value: '-added', label: '时间' },
+  { value: 'name', label: '名字' },
+  { value: '-released', label: '发布日期' },
+  { value: '-metacritic', label: '热度' },
+  { value: '-rating', label: '评价' },
 ];
 
 interface Props {
   onSort: (sortOrder: string) => void;
+  selectedSort: string;
 }
-const SortSelector = ({ onSort }: Props) => {
+const SortSelector = ({ onSort, selectedSort }: Props) => {
+  const currentSort = sortOrders.find((order) => order.value === selectedSort);
   return (
     <Menu>
       <MenuButton marginLeft={10} as={Button} rightIcon={<BsChevronDown />}>
-        Order by:
+        排序: {' ' + currentSort?.label || '全部'}
       </MenuButton>
       <MenuList>
         {sortOrders.map((sort) => (

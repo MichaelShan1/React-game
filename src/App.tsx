@@ -42,6 +42,7 @@ function App() {
         ></PlatformSelector>
         <SortSelector
           onSort={(sortLabel) => setSortGame(sortLabel)}
+          selectedSort={sortGame}
         ></SortSelector>
         <GameGrid
           selectedPlat={selectedPlatform}
