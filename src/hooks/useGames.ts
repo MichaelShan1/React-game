@@ -1,3 +1,4 @@
+import { GameQuery } from './../App';
 import SortSelector from '../components/SortSelector';
 import { Genre } from './useCategory';
 import useData from './useData';
@@ -17,23 +18,18 @@ export interface Game {
   metacritic: number;
 }
 
-const useGames = (
-  selectedCate: Genre | null,
-  selectedPlat: Platform | null,
-  selectedSort: string,
-  inputSearch: string
-) =>
+const useGames = (gameQuery: GameQuery) =>
   useData<Game>(
     '/games',
     {
       params: {
-        genres: selectedCate?.id,
-        parent_platforms: selectedPlat?.id,
-        ordering: selectedSort,
-        search: inputSearch,
+        genres: gameQuery.genre?.id,
+        parent_platforms: gameQuery.platform?.id,
+        ordering: gameQuery.sortgame,
+        search: gameQuery.searchgame,
       },
     },
-    [selectedCate?.id, selectedPlat?.id, selectedSort, inputSearch]
+    [gameQuery]
   );
 
 export default useGames;

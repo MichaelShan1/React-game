@@ -1,18 +1,23 @@
-import { Grid, Show, GridItem } from '@chakra-ui/react';
+import { Grid, Show, GridItem, Box } from '@chakra-ui/react';
 import { useState } from 'react';
 import CategoryList from './components/CategoryList';
 import GameGrid from './components/GameGrid';
+import GameHeading from './components/GameHeading';
 import Navbar from './components/Navbar';
 import PlatformSelector from './components/PlatformSelector';
 import SortSelector from './components/SortSelector';
 import { Genre } from './hooks/useCategory';
 import { Platform } from './hooks/usePlatform';
 
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+  sortgame: string;
+  searchgame: string;
+}
+
 function App() {
-  const [selectedCate, setCate] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectPlat] = useState<Platform | null>(null);
-  const [sortGame, setSortGame] = useState('');
-  const [searchText, setSearch] = useState('');
+  const [GameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
     <Grid
@@ -23,34 +28,35 @@ function App() {
       templateColumns={{ base: '1fr', lg: '200px 1fr' }}
     >
       <GridItem area="nav">
-        <Navbar onSearch={(input) => setSearch(input)}></Navbar>
+        <Navbar
+          onSearch={(search) =>
+            setGameQuery({ ...GameQuery, searchgame: search })
+          }
+        ></Navbar>
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <CategoryList
-            onSelectCate={(cate) => {
-              setCate(cate);
-            }}
-            selectedCate={selectedCate}
+            onSelectCate={(cate) => setGameQuery({ ...GameQuery, genre: cate })}
+            selectedCate={GameQuery.genre}
           ></CategoryList>
         </GridItem>
       </Show>
 
       <GridItem area="main">
+        <GameHeading gameQuery={GameQuery} />
         <PlatformSelector
-          onSelectedPlat={(platform) => setSelectPlat(platform)}
-          selectedPlatform={selectedPlatform}
+          onSelectedPlat={(plat) =>
+            setGameQuery({ ...GameQuery, platform: plat })
+          }
+          selectedPlatform={GameQuery.platform}
         ></PlatformSelector>
+
         <SortSelector
-          onSort={(sortLabel) => setSortGame(sortLabel)}
-          selectedSort={sortGame}
+          onSort={(sortgame) => setGameQuery({ ...GameQuery, sortgame })}
+          selectedSort={GameQuery.sortgame}
         ></SortSelector>
-        <GameGrid
-          selectedPlat={selectedPlatform}
-          selectedCate={selectedCate}
-          selectedSort={sortGame}
-          searchInput={searchText}
-        />
+        <GameGrid gameQuery={GameQuery} />
       </GridItem>
     </Grid>
   );
