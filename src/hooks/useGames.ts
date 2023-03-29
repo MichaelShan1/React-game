@@ -1,3 +1,4 @@
+import SortSelector from '../components/SortSelector';
 import { Genre } from './useCategory';
 import useData from './useData';
 
@@ -16,9 +17,21 @@ export interface Game {
   metacritic: number;
 }
 
-const useGames = (selectedCate: Genre | null) =>
-  useData<Game>('/games', { params: { genres: selectedCate?.id } }, [
-    selectedCate?.id,
-  ]);
+const useGames = (
+  selectedCate: Genre | null,
+  selectedPlat: Platform | null,
+  selectedSort: string
+) =>
+  useData<Game>(
+    '/games',
+    {
+      params: {
+        genres: selectedCate?.id,
+        parent_platforms: selectedPlat?.id,
+        ordering: selectedSort,
+      },
+    },
+    [selectedCate?.id, selectedPlat?.id, selectedSort]
+  );
 
 export default useGames;

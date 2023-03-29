@@ -3,10 +3,16 @@ import { useState } from 'react';
 import CategoryList from './components/CategoryList';
 import GameGrid from './components/GameGrid';
 import Navbar from './components/Navbar';
+import PlatformSelector from './components/PlatformSelector';
+import SortSelector from './components/SortSelector';
 import { Genre } from './hooks/useCategory';
+import { Platform } from './hooks/usePlatform';
 
 function App() {
   const [selectedCate, setCate] = useState<Genre | null>(null);
+  const [selectedPlatform, setSelectPlat] = useState<Platform | null>(null);
+  const [sortGame, setSortGame] = useState('');
+
   return (
     <Grid
       templateAreas={{
@@ -30,7 +36,18 @@ function App() {
       </Show>
 
       <GridItem area="main">
-        <GameGrid selectedCate={selectedCate} />
+        <PlatformSelector
+          onSelectedPlat={(platform) => setSelectPlat(platform)}
+          selectedPlatform={selectedPlatform}
+        ></PlatformSelector>
+        <SortSelector
+          onSort={(sortLabel) => setSortGame(sortLabel)}
+        ></SortSelector>
+        <GameGrid
+          selectedPlat={selectedPlatform}
+          selectedCate={selectedCate}
+          selectedSort={sortGame}
+        />
       </GridItem>
     </Grid>
   );

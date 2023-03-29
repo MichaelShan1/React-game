@@ -32,6 +32,7 @@ const CategoryList = ({ selectedCate, onSelectCate }: Props) => {
               onClick={() => onSelectCate(category)}
               variant="link"
               fontSize="lg"
+              fontWeight={category.id === selectedCate?.id ? 'bold' : 'normal'}
             >
               {category.name}
             </Button>
