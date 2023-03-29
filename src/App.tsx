@@ -12,6 +12,7 @@ function App() {
   const [selectedCate, setCate] = useState<Genre | null>(null);
   const [selectedPlatform, setSelectPlat] = useState<Platform | null>(null);
   const [sortGame, setSortGame] = useState('');
+  const [searchText, setSearch] = useState('');
 
   return (
     <Grid
@@ -22,7 +23,7 @@ function App() {
       templateColumns={{ base: '1fr', lg: '200px 1fr' }}
     >
       <GridItem area="nav">
-        <Navbar></Navbar>
+        <Navbar onSearch={(input) => setSearch(input)}></Navbar>
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
@@ -48,6 +49,7 @@ function App() {
           selectedPlat={selectedPlatform}
           selectedCate={selectedCate}
           selectedSort={sortGame}
+          searchInput={searchText}
         />
       </GridItem>
     </Grid>

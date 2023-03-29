@@ -5,17 +5,25 @@ import { Platform } from '../hooks/usePlatform';
 import GameCard from './GameCard';
 import GameContainer from './GameContainer';
 import GameLoading from './GameLoading';
+import SearchInput from './SearchInput';
 
 interface Props {
   selectedCate: Genre | null;
   selectedPlat: Platform | null;
   selectedSort: string;
+  searchInput: string;
 }
-const GameGrid = ({ selectedCate, selectedPlat, selectedSort }: Props) => {
+const GameGrid = ({
+  selectedCate,
+  selectedPlat,
+  selectedSort,
+  searchInput,
+}: Props) => {
   const { data, error, loading } = useGames(
     selectedCate,
     selectedPlat,
-    selectedSort
+    selectedSort,
+    searchInput
   );
 
   const loadingGames = [1, 2, 3, 4, 5, 6, 7, 8, 9];
