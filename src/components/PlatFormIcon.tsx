@@ -12,7 +12,6 @@ import { SiNintendo } from 'react-icons/si';
 import { BsGlobe } from 'react-icons/bs';
 import { Platform } from '../hooks/useGames';
 import { IconType } from 'react-icons/lib/esm/iconBase';
-import { color } from 'framer-motion';
 
 interface Props {
   platforms: Platform[];
