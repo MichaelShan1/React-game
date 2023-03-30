@@ -20,7 +20,7 @@ const SortSelector = ({ onSort, selectedSort }: Props) => {
   return (
     <Menu>
       <MenuButton marginLeft={10} as={Button} rightIcon={<BsChevronDown />}>
-        排序: {currentSort?.label && '全部'}
+        排序: {currentSort?.label || '全部'}
       </MenuButton>
       <MenuList>
         {sortOrders.map((sort) => (
