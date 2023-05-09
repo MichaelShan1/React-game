@@ -16,16 +16,16 @@ interface Props {
   selectedCate: Genre | null;
 }
 const CategoryList = ({ selectedCate, onSelectCate }: Props) => {
-  const { data, loading, error } = useCategory();
+  const { data, isLoading, error } = useCategory();
   if (error) return null;
-  if (loading) return <Spinner></Spinner>;
+  if (isLoading) return <Spinner></Spinner>;
   return (
     <>
       <Heading fontSize="2xl" marginBottom={3}>
         类型
       </Heading>
       <List>
-        {data.map((category) => (
+        {data?.results.map((category) => (
           <ListItem paddingY="5px" key={category.id}>
             <HStack>
               <Image
