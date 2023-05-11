@@ -1,3 +1,3 @@
 # React-game
 ### Built with React18 + TypeScript + Vite + React Query
-### link: https://react-page-michaelshan.netlify.app/ 一样的内容
+### link: https://react-page-michaelshan.netlify.app/ 
