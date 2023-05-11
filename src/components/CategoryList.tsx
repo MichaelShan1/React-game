@@ -13,9 +13,9 @@ import optimizeImage from '../services/image-url';
 
 interface Props {
   onSelectCate: (cate: Genre) => void;
-  selectedCate: Genre | null;
+  selectedCateId?: number;
 }
-const CategoryList = ({ selectedCate, onSelectCate }: Props) => {
+const CategoryList = ({ selectedCateId, onSelectCate }: Props) => {
   const { data, isLoading, error } = useCategory();
   if (error) return null;
   if (isLoading) return <Spinner></Spinner>;
@@ -40,9 +40,7 @@ const CategoryList = ({ selectedCate, onSelectCate }: Props) => {
                 onClick={() => onSelectCate(category)}
                 variant="link"
                 fontSize="lg"
-                fontWeight={
-                  category.id === selectedCate?.id ? 'bold' : 'normal'
-                }
+                fontWeight={category.id === selectedCateId ? 'bold' : 'normal'}
               >
                 {category.name}
               </Button>

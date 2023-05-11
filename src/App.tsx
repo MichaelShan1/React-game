@@ -10,8 +10,8 @@ import { Genre } from './hooks/useCategory';
 import { Platform } from './hooks/usePlatform';
 
 export interface GameQuery {
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId?: number;
+  platformId?: number;
   sortgame: string;
   searchgame: string;
 }
@@ -37,8 +37,10 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <CategoryList
-            onSelectCate={(cate) => setGameQuery({ ...GameQuery, genre: cate })}
-            selectedCate={GameQuery.genre}
+            onSelectCate={(cate) =>
+              setGameQuery({ ...GameQuery, genreId: cate.id })
+            }
+            selectedCateId={GameQuery.genreId}
           ></CategoryList>
         </GridItem>
       </Show>
@@ -48,9 +50,9 @@ function App() {
         <HStack>
           <PlatformSelector
             onSelectedPlat={(plat) =>
-              setGameQuery({ ...GameQuery, platform: plat })
+              setGameQuery({ ...GameQuery, platformId: plat.id })
             }
-            selectedPlatform={GameQuery.platform}
+            selectedPlatformId={GameQuery.platformId}
           ></PlatformSelector>
           <SortSelector
             onSort={(sortgame) => setGameQuery({ ...GameQuery, sortgame })}
