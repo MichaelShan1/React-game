@@ -6,17 +6,15 @@ import {
   List,
   ListItem,
   Spinner,
-  Text,
 } from '@chakra-ui/react';
-import useCategory, { Genre } from '../hooks/useCategory';
+import useCategory from '../hooks/useCategory';
 import optimizeImage from '../services/image-url';
+import useGameQuery from '../store';
 
-interface Props {
-  onSelectCate: (cate: Genre) => void;
-  selectedCateId?: number;
-}
-const CategoryList = ({ selectedCateId, onSelectCate }: Props) => {
+const CategoryList = () => {
   const { data, isLoading, error } = useCategory();
+  const selectedCateId = useGameQuery((s) => s.gameQuery.genreId);
+  const setGenreId = useGameQuery((s) => s.setGenreId);
   if (error) return null;
   if (isLoading) return <Spinner></Spinner>;
   return (
@@ -37,7 +35,7 @@ const CategoryList = ({ selectedCateId, onSelectCate }: Props) => {
               <Button
                 whiteSpace={'normal'}
                 textAlign={'left'}
-                onClick={() => onSelectCate(category)}
+                onClick={() => setGenreId(category.id)}
                 variant="link"
                 fontSize="lg"
                 fontWeight={category.id === selectedCateId ? 'bold' : 'normal'}
