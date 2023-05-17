@@ -8,6 +8,8 @@ const api = new apiClient<Game>('/games');
 export interface Game {
   id: number;
   name: string;
+  slug: string;
+  description_raw: string;
   background_image: string;
   //parent_platform property includes an array of platform objects.
   parent_platforms: { platform: Platform }[];
