@@ -1,5 +1,6 @@
 import { Heading, Spinner, Text } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
+import ExpandableText from '../components/ExpandableText';
 import useGame from '../hooks/useGame';
 
 const GameDetailPage = () => {
@@ -10,7 +11,7 @@ const GameDetailPage = () => {
   return (
     <>
       <Heading>{data.name}</Heading>
-      <Text>{data.description_raw}</Text>
+      <ExpandableText>{data.description_raw}</ExpandableText>
     </>
   );
 };
