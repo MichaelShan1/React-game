@@ -2,13 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import apiClient from '../services/api-client';
 import platforms from '../data/platforms';
+import { Platform } from '../entities/Platform';
 
 const api = new apiClient<Platform>('/platforms/lists/parents');
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
 const usePlatform = () =>
   useQuery({
     queryKey: ['platforms'],
